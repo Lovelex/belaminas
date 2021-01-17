@@ -1,6 +1,6 @@
 <template>
-  <v-sheet max-width="280" v-if="product">
-    <v-card height="320" style="position: relative" class="pa-1">
+  <v-sheet :max-width="width" v-if="product">
+    <v-card max-height="320" style="position: relative" class="pa-1">
       <div
         style="position: absolute; z-index: 1"
         v-if="product.desconto"
@@ -68,6 +68,10 @@ import productMixin from "@/mixins/productMixin";
 export default {
   props: {
     product: Object,
+    width: {
+      type: String,
+      default: '280'
+    }
   },
   mixins: [productMixin],
 };
