@@ -17,7 +17,7 @@
             <v-card @click.self="handleOpenInUpdateMode(item)" class="pa-2 py-6">
               <div class="d-flex justify-end">
 
-              <v-btn @click.self="handleDelete(item.id)" color="error" fab small depressed>
+              <v-btn @click="handleDelete(item.id)" color="error" fab small depressed>
                 <v-icon> mdi-delete </v-icon>
               </v-btn>
               </div>
@@ -25,7 +25,6 @@
                 {{ item.icon }}
               </v-icon>
               <span class="text-caption">{{item.href}}</span>
-              
             </v-card>
           </v-col>
         </v-row>

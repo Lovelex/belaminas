@@ -14,6 +14,7 @@ const newItem = () => ({
   descricao: "",
   preco: 0,
   desconto: 0,
+  calculoDesconto: 0,
   quantidade: 0,
   tamanhos: [],
   cores: [],
@@ -88,7 +89,10 @@ export default {
         collection,
         item: {
           ...state.item,
-          preco: payload.precoValue
+          preco: payload.precoValue,
+          calculoDesconto: parseFloat(((1 - 0.01 * state.item.desconto) * payload.precoValue).toFixed(
+            2
+          ))
         },
       }, { root: true });
 
@@ -103,6 +107,9 @@ export default {
       }
       if (payload.precoValue) {
         updates.preco = payload.precoValue
+        updates.calculoDesconto = parseFloat(((1 - 0.01 * state.item.desconto) * payload.precoValue).toFixed(
+          2
+        ))
       }
       await dispatch("updateDoc", { collection, id: state.item.id, updates }, { root: true });
 
