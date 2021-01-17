@@ -15,7 +15,7 @@
         <v-badge
           class="mr-16"
           v-if="item.name === 'AdminMensagens'"
-          :content="messagesLength"
+          :content="messagesLength || '0'"
         />
       </v-list-item>
     </v-list>

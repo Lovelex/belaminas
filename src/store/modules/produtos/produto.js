@@ -1,5 +1,4 @@
-import { db } from '../../../plugins/firebase'
-import { firestoreAction } from 'vuexfire'
+import { bindItem } from '../../firebase/getDoc'
 
 const collection = 'produtos'
 
@@ -12,8 +11,6 @@ export default {
     getItem: state => state.item,
   },
   actions: {
-    bindItem: firestoreAction(({ bindFirestoreRef }, payload) => {
-      return bindFirestoreRef('item', db.collection(collection).doc(payload.id))
-    }),
+    ...bindItem(collection)
   }
 }

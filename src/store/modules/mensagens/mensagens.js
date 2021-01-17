@@ -1,5 +1,5 @@
+import { bindItems } from '../../firebase/getCollection'
 import { db } from '../../../plugins/firebase'
-import { firestoreAction } from 'vuexfire'
 
 import state from '../state'
 import getters from '../getters'
@@ -36,16 +36,23 @@ export default {
   },
   actions: {
     ...actions,
-    bindItems: firestoreAction(({ bindFirestoreRef, state }) => {
-      if (!state.items.length) {
-        return bindFirestoreRef('items', db.collection(collection).orderBy('createdAt', 'desc'))
-      }
-    }),
+    ...bindItems(collection),
     fillItem({ state }, payload) {
       state.item = payload;
     },
     resetItem({ state }) {
       state.item = newItem();
+    },
+    async setNewMessagesToFalse() {
+      const collectionRef = await db.collection(collection)
+      const docsWhereNewMessages = await collectionRef.where('newMessage', '==', true)
+      const getDocsWhereNewMessages = await docsWhereNewMessages.get()
+
+      if(!getDocsWhereNewMessages.empty) {
+        getDocsWhereNewMessages.forEach(doc => {
+          collectionRef.doc(doc.id).update({ newMessage: false })
+        })
+      }
     },
     async handleSubmit({ state, dispatch }) {
       await dispatch("addDoc", {

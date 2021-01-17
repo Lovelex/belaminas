@@ -1,5 +1,6 @@
 import { db } from '../../../plugins/firebase'
 import { firestoreAction } from 'vuexfire'
+import { bindItems } from '../../firebase/getCollection'
 
 import state from '../state'
 import getters from '../getters'
@@ -30,11 +31,7 @@ export default {
   },
   actions: {
     ...actions,
-    bindItems: firestoreAction(({ bindFirestoreRef, state }) => {
-      if(!state.items.length) {
-        return bindFirestoreRef('items', db.collection(collection))
-      }
-    }),
+    ...bindItems(collection),
     fillItem({ state }, payload) {
       state.item = payload;
     },

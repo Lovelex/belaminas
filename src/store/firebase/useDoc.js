@@ -34,7 +34,6 @@ export default {
       state.docIsLoading = true
       const collectionRef = db.collection(payload.collection)
       const docRef = collectionRef.doc(payload.id)
-      console.log(payload)
       try {
         await docRef
           .update({

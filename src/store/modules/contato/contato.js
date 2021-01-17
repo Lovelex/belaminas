@@ -1,5 +1,4 @@
-import { db } from '../../../plugins/firebase'
-import { firestoreAction } from 'vuexfire'
+import { bindItem } from '../../firebase/getDoc'
 
 const collection = 'contato'
 
@@ -12,11 +11,7 @@ export default {
     getItem: state => state.item,
   },
   actions: {
-    bindItem: firestoreAction(({ bindFirestoreRef, state }) => {
-      if(!Object.keys(state.item).length) {
-        return bindFirestoreRef('item', db.collection(collection).doc('contato'))
-      }
-    }),
+    ...bindItem(collection, 'contato'),
     handleUpdate({ state, dispatch }) {
       const updates = {
         ...state.item

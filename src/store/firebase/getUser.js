@@ -8,10 +8,9 @@ export default {
     getUser: state => state.user
   },
   actions: {
-    onAuthChange({state}){
+    onAuthChange({ state }) {
       auth
         .onAuthStateChanged(user => {
-          console.log('Auth changed, user: ', user)
           state.user = user
         })
     }

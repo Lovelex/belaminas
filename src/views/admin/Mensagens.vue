@@ -47,6 +47,14 @@ export default {
       return this.initial + this.limit;
     },
   },
+  methods: {
+    setNewMessagesToFalse() {
+      this.$store.dispatch('mensagens/setNewMessagesToFalse')
+    }
+  },
+  created() {
+    this.setNewMessagesToFalse()
+  }
 };
 </script>
 
