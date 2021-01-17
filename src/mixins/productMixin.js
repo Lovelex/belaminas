@@ -6,7 +6,7 @@ export default {
       );
     },
     parcelas() {
-      return (this.product.preco / (this.product.parcelas || 1)).toFixed(2);
+      return (this.discount / (this.product.parcelas || 1)).toFixed(2);
     },
   },
 }
